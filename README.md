@@ -22,6 +22,10 @@ app.use('/',(req, res)=>{
     res.send('hello,express!')
 })
 
+app.user((req,res)=>{
+    res.send('hello2)
+})
+
 const PORT = 5000
 app.listen(PORT,()=>{
     console.log(`The express server is listening at prot: ${PORT}`)
