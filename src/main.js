@@ -7,21 +7,20 @@ const fs = require('fs')
 
 const app = express()
 
-// middle ware
-// app.use('/', async(req, res, next)=>{
-//     console.log('middleware1')
-//     const fileContent = await fs.promises.readFile('.gitignore')
-//     //@ts-ignore
-//     req.fileContent = fileContent
-//         next() //next()실행을하지않으면 계속 middleware1이 실행중
-// }
-// )
+app.set('views', 'src/views')
+app.set('view engine', 'pug')
 
-// app.use((req,res)=>{
-//     console.log('middleware2')
-//     //@ts-ignore
-//     res.send(`${req.fileContent}`)
-// })
+const USERS = {
+    15:{
+        nickname:'foo',
+        profileImage: undefined
+    },
+    16:{
+        nickname:'bar',
+        profileImage: undefined
+
+    }
+}
 
 const userRouter = express.Router()
 
@@ -29,6 +28,7 @@ userRouter.get('/', (req,res)=>{
     res.send('User list')
 })
 
+// /users/15
 userRouter.get('/:id', (req,res)=>{
     res.send('User info with ID')
 })
@@ -38,6 +38,11 @@ userRouter.post('/',(req,res)=>{
 })
 
 app.use('/users', userRouter)
+app.get('/',(req,res)=>{
+    res.render('index',{
+        msg:'use me!'
+    })
+})
 
 const PORT = 5000
 app.listen(PORT,()=>{
