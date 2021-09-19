@@ -6,3 +6,9 @@ html
         //- div=msg
         h2 Nickname
         div.green= nickname
+
+        h2 Profile 
+        //폼안의 버튼을 클릭시 액션의 주소로 multipart/form-data 형태로 파일이 올라간다.
+        form(action=`/user/${userId}/profile` method="post" enctype="multipart/form-data")
+            input(type="file" name="profile")
+            button Upload profile picture
