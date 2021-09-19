@@ -9,7 +9,7 @@ const bodyParser = require('body-parser')
 const app = express()
 app.use(bodyParser.json())
 
-app.use(express.static('src/public'))
+app.use('/public', express.static('src/public'))
 
 app.set('views', 'src/views')
 app.set('view engine', 'pug')
@@ -46,7 +46,9 @@ userRouter.get('/:id', (req,res)=>{
         //@ts-ignore
         res.send(req.user)
     }else if(resMineType === 'html'){
-        res.render('index')
+        res.render('index',{
+            nickname: req.user.nickname
+        })
     }else{
         // error handling
     }
